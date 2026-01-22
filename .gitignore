@@ -1,0 +1,26 @@
+﻿# ==== Python ====
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# ==== Virtual Environment ====
+.venv/
+venv/
+env/
+
+# ==== Environment Variables ====
+.env
+
+# ==== Data / Output ====
+data/
+*.csv
+*.json
+
+# ==== OS / Editor ====
+.DS_Store
+Thumbs.db
+.vscode/
+
+# ==== Logs ====
+*.log
