@@ -5,7 +5,6 @@ import hashlib
 import os
 import json
 from pathlib import Path
-from __future__ import annotations
 
 class KISCSVSaver:
     """KIS 데이터 CSV 저장기"""
@@ -18,33 +17,7 @@ class KISCSVSaver:
     
 
 
-    def append_raw_row(
-        *,
-        raw_csv_path: str | Path,
-        base_url: str,
-        endpoint: str,
-        tr_id: str,
-        params: dict,
-        status_code: int | None,
-        response_obj,
-    ) -> None:
-        Path(raw_csv_path).parent.mkdir(parents=True, exist_ok=True)
-
-        row = {
-            "fetched_at": datetime.now().isoformat(timespec="seconds"),
-            "base_url": base_url,
-            "endpoint": endpoint,
-            "tr_id": tr_id,
-            "params_json": json.dumps(params, ensure_ascii=False),
-            "status_code": status_code,
-            "raw_json": json.dumps(response_obj, ensure_ascii=False),
-        }
-
-        df = pd.DataFrame([row])
-
-        # 파일 없으면 헤더 포함 생성, 있으면 헤더 없이 append
-        write_header = not Path(raw_csv_path).exists()
-        df.to_csv(raw_csv_path, mode="a", header=write_header, index=False, encoding="utf-8-sig")
+    
 
 
     def save_raw_data(self, endpoint: str, params: Dict[str, Any], 
@@ -111,3 +84,31 @@ class KISCSVSaver:
         
         print(f"💾 정규화 데이터 저장 완료: {self.norm_csv_path}")
         print(f"   - {len(norm_data)}건 저장 완료")
+        
+def append_raw_row(
+        *,
+        raw_csv_path: str | Path,
+        base_url: str,
+        endpoint: str,
+        tr_id: str,
+        params: dict,
+        status_code: int | None,
+        response_obj,
+    ) -> None:
+        Path(raw_csv_path).parent.mkdir(parents=True, exist_ok=True)
+
+        row = {
+            "fetched_at": datetime.now().isoformat(timespec="seconds"),
+            "base_url": base_url,
+            "endpoint": endpoint,
+            "tr_id": tr_id,
+            "params_json": json.dumps(params, ensure_ascii=False),
+            "status_code": status_code,
+            "raw_json": json.dumps(response_obj, ensure_ascii=False),
+        }
+
+        df = pd.DataFrame([row])
+
+        # 파일 없으면 헤더 포함 생성, 있으면 헤더 없이 append
+        write_header = not Path(raw_csv_path).exists()
+        df.to_csv(raw_csv_path, mode="a", header=write_header, index=False, encoding="utf-8-sig")

@@ -11,9 +11,10 @@ env/
 
 # ==== Environment Variables ====
 .env
-
+.secrets/
 # ==== Data / Output ====
 data/
+outputs/
 *.csv
 *.json
 
