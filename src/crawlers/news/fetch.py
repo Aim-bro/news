@@ -1,7 +1,7 @@
 import requests
 from datetime import datetime
 from typing import Optional, Dict, Any, List
-from .config import KISConfig, KISAuth
+from ...common.config import KISConfig, KISAuth
 
 
 class KISNewsFetcher:
@@ -10,7 +10,7 @@ class KISNewsFetcher:
     def __init__(self, config: KISConfig):
         self.config = config
         self.auth = KISAuth(config)
-        from .kis_client import KISClient
+        from ...common.kis_client import KISClient
         self.client = KISClient(self.auth)
         self.base_url = f"{config.api_url}/uapi/domestic-stock/v1/quotations/inquire-price"
         self.news_title_url = f"{config.api_url}/uapi/domestic-stock/v1/quotations/news-title"

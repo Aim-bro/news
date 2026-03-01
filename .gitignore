@@ -22,6 +22,12 @@ outputs/
 .DS_Store
 Thumbs.db
 .vscode/
+.ipynb_checkpoints/
 
 # ==== Logs ====
 *.log
+
+# ==== Tool Caches ====
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
